@@ -5,7 +5,7 @@
       "sources": [ "src/lucy.cc" ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")",
-        "external/includes"
+        "../external/includes"
       ],
       "link_settings": {
         "libraries": [
@@ -13,7 +13,7 @@
           "-lclownfish",
         ],
         "ldflags": [
-            "-Lexternal/libs"
+            "-L../external/libs"
         ]
       }
     }
