@@ -35,7 +35,13 @@ build/Release
 # Dependency directories
 node_modules/
 jspm_packages/
+
+#node-gyp build folder
 build/
+
+vscode settings
+#
+.vscode/
 
 # Typescript v1 declaration files
 typings/
