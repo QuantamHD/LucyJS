@@ -8,14 +8,14 @@
         "external/includes"
       ],
       "conditions": [
-        ['OS == mac', {
+        ['OS == "mac"', {
           "libraries": [
             "-L<!(pwd)/external/libs/osx",
             "-llucy",
             "-lclownfish",
           ]
         }],
-        ['OS in linux freebsd openbsd solaris android',{
+        ['OS in "linux freebsd openbsd solaris android"',{
           "libraries": [
             "-L<!(pwd)/external/libs/linux",
             "-llucy",
