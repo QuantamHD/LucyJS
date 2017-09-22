@@ -7,13 +7,23 @@
         "<!(node -e \"require('nan')\")",
         "external/includes"
       ],
-      "link_settings": {
-        "libraries": [
-          "-L<!(pwd)/external/libs",
-          "-llucy",
-          "-lclownfish",
-        ]
-      }
+      "conditions": [
+        ['OS == mac', {
+          "libraries": [
+            "-L<!(pwd)/external/libs/osx",
+            "-llucy",
+            "-lclownfish",
+          ]
+        }],
+        ['OS in linux freebsd openbsd solaris android',{
+          "libraries": [
+            "-L<!(pwd)/external/libs/linux",
+            "-llucy",
+            "-lclownfish",
+          ]
+        }]
+        
+      ]
     }
   ]
 }
