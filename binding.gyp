@@ -29,10 +29,10 @@
         }],
         ['OS=="win"', {
           'include_dirs' : [
-            "C:\\Users\\Yech\\Documents\\LucyJS\\external\\includes\\windows"
+            "<!(cd)\\external\\includes\\windows"
           ],
           'library_dirs' : [
-            "C:\\Users\\Yech\\Documents\\LucyJS\\external\\libs\\windows"
+            "<!(cd)\\external\\libs\\windows"
           ],
           'defines' : [
             'VC_EXTRALEAN',
