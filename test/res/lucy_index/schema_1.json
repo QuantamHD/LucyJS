@@ -1,0 +1,24 @@
+{
+  "_class": "Lucy::Plan::Schema",
+  "analyzers": [
+    null,
+    {
+      "_class": "Lucy::Analysis::EasyAnalyzer",
+      "language": "en"
+    }
+  ],
+  "fields": {
+    "content": {
+      "analyzer": "1",
+      "type": "fulltext"
+    },
+    "title": {
+      "analyzer": "1",
+      "type": "fulltext"
+    },
+    "url": {
+      "analyzer": "1",
+      "type": "fulltext"
+    }
+  }
+}
