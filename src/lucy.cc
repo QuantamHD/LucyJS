@@ -1,4 +1,5 @@
 #include <nan.h>
+
 #define CFISH_USE_SHORT_NAMES
 #define LUCY_USE_SHORT_NAMES
 #include "Clownfish/String.h"
@@ -9,8 +10,23 @@
 #include "Lucy/Plan/StringType.h"
 #include "Lucy/Plan/Schema.h"
 
-void Init(v8::Local<v8::Object> exports) {
-  lucy_bootstrap_parcel();  
+
+#include "index_searcher.h"
+#include "hit_doc.h"
+
+using v8::FunctionTemplate;
+
+NAN_METHOD(aString) {
+  info.GetReturnValue().Set(Nan::New("This is a thing.").ToLocalChecked());
+}
+
+
+NAN_MODULE_INIT(Init) {
+  lucy_bootstrap_parcel();
+  Nan::Set(target, Nan::New("aString").ToLocalChecked(), Nan::GetFunction(Nan::New<FunctionTemplate>(aString)).ToLocalChecked());
+
+  HitDocJS::Init(target);
+  IndexSearcherJS::Init(target);
 }
 
 NODE_MODULE(lucy, Init)

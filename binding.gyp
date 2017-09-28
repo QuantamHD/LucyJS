@@ -2,7 +2,11 @@
   "targets": [
     {
       "target_name": "lucy",
-      "sources": [ "src/lucy.cc" ],
+      "sources": [ 
+        "src/hits.h",
+        "src/index_searcher.cc",
+        "src/lucy.cc"
+      ],
       "include_dirs": [
         "<!(node -e \"require('nan')\")"
       ],
