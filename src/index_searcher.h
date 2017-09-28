@@ -3,8 +3,6 @@
 
 #include <nan.h>
 
-#define CFISH_USE_SHORT_NAMES
-#define LUCY_USE_SHORT_NAMES
 #include "Clownfish/String.h"
 #include "Lucy/Document/HitDoc.h"
 #include "Lucy/Search/Hits.h"
@@ -25,6 +23,6 @@ class IndexSearcherJS : public Nan::ObjectWrap {
     static NAN_METHOD(Get_Hits);
 
     static Nan::Persistent<v8::Function> constructor;
-    IndexSearcher* index_searcher;
+    lucy_IndexSearcher* index_searcher;
 };
 #endif

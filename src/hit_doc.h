@@ -1,10 +1,7 @@
-#ifndef HITS_JS_H
-#define HITS_JS_H
+#ifndef HIT_DOC_JS_H
+#define HIT_DOC_JS_H
 
 #include <nan.h>
-
-#define CFISH_USE_SHORT_NAMES 
-#define LUCY_USE_SHORT_NAMES
 
 #include "Clownfish/String.h"
 #include "Lucy/Document/HitDoc.h"
@@ -28,10 +25,10 @@ public:
         constructor().Reset(tpl->GetFunction());
     }
     
-    static v8::Local<v8::Object> NewObject(HitDoc* new_hit_doc)
+    static v8::Local<v8::Object> NewObject(lucy_HitDoc* new_hit_doc)
     {        
         Nan::EscapableHandleScope scope;
-        v8::Local<v8::Object> instance = Nan::New<v8::Function>(constructor())->NewInstance();
+        v8::Local<v8::Object> instance = Nan::NewInstance(Nan::New<v8::Function>(constructor())).ToLocalChecked();
         
         // Set internal data
         ObjectWrap::Unwrap<HitDocJS>(instance)->hit_doc = new_hit_doc;
@@ -43,14 +40,17 @@ private:
     virtual ~HitDocJS() {}
 
     static NAN_METHOD(Get_Field){
-        HitDoc *hit_doc = ObjectWrap::Unwrap<HitDocJS>(info.Holder())->hit_doc;
+        lucy_HitDoc *hit_doc = ObjectWrap::Unwrap<HitDocJS>(info.Holder())->hit_doc;
         REQUIRE_ARGUMENT_STRING(0, field_name);
 
-        String *field_name_cfish = Str_newf(*field_name);
-        String *field = (String*)HitDoc_Extract(hit_doc, field_name_cfish);
-        char *field_c = Str_To_Utf8(field);
+        cfish_String *field_name_cfish = cfish_Str_newf(*field_name);
+        cfish_String *field = (cfish_String*)LUCY_HitDoc_Extract(hit_doc, field_name_cfish);
+        char *field_c = CFISH_Str_To_Utf8(field);
 
         info.GetReturnValue().Set(Nan::New(field_c).ToLocalChecked());
+        CFISH_DECREF(field_name_cfish);
+        CFISH_DECREF(field);
+        free(field_c);
     }
     
     static NAN_METHOD(New)
@@ -67,6 +67,6 @@ private:
         return my_constructor;
     }
     
-    HitDoc *hit_doc;
+    lucy_HitDoc *hit_doc;
 };
 #endif

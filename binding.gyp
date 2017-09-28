@@ -3,7 +3,8 @@
     {
       "target_name": "lucy",
       "sources": [ 
-        "src/hits.h",
+        "src/hit_doc.h",
+        "src/hits.cc",
         "src/index_searcher.cc",
         "src/lucy.cc"
       ],
