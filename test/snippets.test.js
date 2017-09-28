@@ -9,7 +9,7 @@ const { execSync } = require("child_process");
 
 describe("lucy's snippets", () => {
   it("won't kill the process when an IndexSearcher fails to find a directory", () => {
-    // Run this proce
+    // Run this in a seperate process
     execSync("node ./test/snippets/opendir_fail.js"); // If this throw's, we've failed.
   });
 });
