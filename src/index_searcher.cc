@@ -5,10 +5,7 @@
 
 Nan::Persistent<v8::Function> IndexSearcherJS::constructor;
 
-IndexSearcherJS::IndexSearcherJS(const char *index_path){
-  cfish_String *folder = cfish_Str_newf("%s", index_path);
-  index_searcher = lucy_IxSearcher_new((cfish_Obj*)folder);
-  CFISH_DECREF(folder);
+IndexSearcherJS::IndexSearcherJS(){
 }
 
 IndexSearcherJS::~IndexSearcherJS() {
@@ -42,6 +39,16 @@ void IndexSearcherJS::Get_Hits(const Nan::FunctionCallbackInfo<v8::Value>& info)
   CFISH_DECREF(cfish_query_string);  
 }
 
+void IndexSearcherJS::Initialize_Lucy_IndexSearcher(void* context){
+  IndexSearcherJS *uninitialized_searcher = (IndexSearcherJS*) context;
+
+  cfish_String *folder = cfish_Str_newf("%s", uninitialized_searcher->index_path);
+  lucy_IndexSearcher *index_searcher_unverified = lucy_IxSearcher_new((cfish_Obj*)folder);
+  CFISH_DECREF(folder);
+
+  uninitialized_searcher->index_searcher = index_searcher_unverified;
+}
+
 void IndexSearcherJS::New(const Nan::FunctionCallbackInfo<v8::Value>& info) {
   if (!info.IsConstructCall()) {
     return Nan::ThrowTypeError("Use the new operator to an IndexSearcher Object.");
@@ -49,8 +56,21 @@ void IndexSearcherJS::New(const Nan::FunctionCallbackInfo<v8::Value>& info) {
 
   REQUIRE_ARGUMENT_STRING(0, filename);
 
-  IndexSearcherJS* obj = new IndexSearcherJS(*filename);
-  obj->Wrap(info.This());
-  info.GetReturnValue().Set(info.This());
-  
+  IndexSearcherJS* index_searcher_js = new IndexSearcherJS();
+  index_searcher_js->index_path = *filename;
+
+  cfish_Err* err = cfish_Err_trap(
+    Initialize_Lucy_IndexSearcher, 
+    (void*)(index_searcher_js)
+  );
+
+  if (err != NULL) {
+    Nan::ThrowError("The supplied path is either not a lucy index, or is not a valid path.");
+    return;
+  }
+
+  index_searcher_js->Wrap(info.This());
+  info.GetReturnValue().Set(info.This()); 
 }
+
+
