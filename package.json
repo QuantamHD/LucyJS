@@ -19,6 +19,9 @@
     "jest": "^21.2.1"
   },
   "jest": {
-    "testPathIgnorePatterns": ["/node_modules/", "/src/"]
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/src/"
+    ]
   }
 }
