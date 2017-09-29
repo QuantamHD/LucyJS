@@ -39,6 +39,11 @@ void IndexSearcherJS::Get_Hits(const Nan::FunctionCallbackInfo<v8::Value>& info)
   CFISH_DECREF(cfish_query_string);  
 }
 
+
+/** This is a wrapper around creating a lucy_IndexSearch.
+ * The behavior of creating an index is dangerous because it may not exist.
+ * so we must wrap this behavior in clownfish error handing.
+ */
 void IndexSearcherJS::Initialize_Lucy_IndexSearcher(void* context){
   IndexSearcherJS *uninitialized_searcher = (IndexSearcherJS*) context;
 
