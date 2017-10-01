@@ -8,9 +8,8 @@
 #include "Lucy/Document/HitDoc.h"
 #include "Lucy/Search/Hits.h"
 #include "Lucy/Search/IndexSearcher.h"
+#include "Lucy/Plan/Schema.h"
 #include "hit_doc.h"
-
- 
 
 class IndexSearcherJS : public Nan::ObjectWrap {
   public:
@@ -22,6 +21,7 @@ class IndexSearcherJS : public Nan::ObjectWrap {
 
     static NAN_METHOD(New);
     static NAN_METHOD(Get_Hits);
+    static NAN_METHOD(Get_Schema);
     static void Initialize_Lucy_IndexSearcher(void* context);
 
     static Nan::Persistent<v8::Function> constructor;

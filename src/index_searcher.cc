@@ -1,4 +1,5 @@
 #include "index_searcher.h"
+#include "schema.h"
 #include "hits.h"
 #include "macros.h"
 #include <vector>
@@ -21,6 +22,7 @@ void IndexSearcherJS::Init(v8::Local<v8::Object> exports) {
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
   Nan::SetPrototypeMethod(tpl, "hits", Get_Hits);
+  Nan::SetPrototypeMethod(tpl, "get_schema", Get_Schema);
   
   constructor.Reset(tpl->GetFunction());
   exports->Set(Nan::New("IndexSearcher").ToLocalChecked(), tpl->GetFunction());
@@ -37,6 +39,13 @@ void IndexSearcherJS::Get_Hits(const Nan::FunctionCallbackInfo<v8::Value>& info)
 
   info.GetReturnValue().Set(HitsJS::NewObject(hits));
   CFISH_DECREF(cfish_query_string);  
+}
+
+NAN_METHOD(IndexSearcherJS::Get_Schema) {
+  auto index_searcher = ObjectWrap::Unwrap<IndexSearcherJS>(info.Holder())->index_searcher;
+  lucy_Schema *schema = LUCY_IxSearcher_Get_Schema(index_searcher);
+
+  info.GetReturnValue().Set(SchemaJS::NewObject(schema));
 }
 
 
