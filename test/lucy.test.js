@@ -15,4 +15,13 @@ describe("lucy", () => {
     const index_searcher = new lucy.IndexSearcher(LUCY_INDEX);
     expect(index_searcher).toBeDefined();
   });
+
+  it("has a Schema method", () => {
+    expect(lucy.Schema).toBeDefined();
+  });
+
+  it("can create a Schema", () => {
+    const schema = new lucy.Schema();
+    expect(schema).toBeDefined();
+  });
 });
