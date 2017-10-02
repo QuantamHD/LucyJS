@@ -3,6 +3,8 @@ Lucy JS is a wrapper around the Apache Lucy search engine library.
 
 ## Usage
 
+To add LucyJS as a dependency to your project run `npm install lucyjs --save`
+
 ### Mac
   * Install Xcode
   * Open Xcode at least once and accept terms of use
