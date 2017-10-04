@@ -5,6 +5,7 @@
       "sources": [ 
         "src/hit_doc.cc",
         "src/hits.cc",
+        "src/easy_analyzer.cc",
         "src/schema.cc",
         "src/index_searcher.cc",
         "src/lucy.cc"

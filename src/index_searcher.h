@@ -12,20 +12,20 @@
 #include "hit_doc.h"
 
 class IndexSearcherJS : public Nan::ObjectWrap {
-  public:
-    static void Init(v8::Local<v8::Object> exports);
+public:
+  static void Init(v8::Local<v8::Object> exports);
 
-  private:
-    explicit IndexSearcherJS();
-    ~IndexSearcherJS();
+private:
+  explicit IndexSearcherJS();
+  ~IndexSearcherJS();
 
-    static NAN_METHOD(New);
-    static NAN_METHOD(Get_Hits);
-    static NAN_METHOD(Get_Schema);
-    static void Initialize_Lucy_IndexSearcher(void* context);
+  static NAN_METHOD(New);
+  static NAN_METHOD(Get_Hits);
+  static NAN_METHOD(Get_Schema);
+  static void Initialize_Lucy_IndexSearcher(void* context);
 
-    static Nan::Persistent<v8::Function> constructor;
-    lucy_IndexSearcher* index_searcher;
-    char *index_path;
+  static Nan::Persistent<v8::Function> constructor;
+  lucy_IndexSearcher* index_searcher;
+  char *index_path;
 };
 #endif
