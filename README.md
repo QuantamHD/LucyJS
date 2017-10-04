@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://i.imgur.com/N2JUrDr.png" width="300px"/>
+</p>
+
+
 # Lucy JS
 Lucy JS is a wrapper around the Apache Lucy search engine library.
 
