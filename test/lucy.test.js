@@ -24,4 +24,18 @@ describe("lucy", () => {
     const schema = new lucy.Schema();
     expect(schema).toBeDefined();
   });
+
+  it("has a EasyAnalyzer method", () => {
+    expect(lucy.EasyAnalyzer).toBeDefined();
+  });
+
+  it("can create a EasyAnalyzer with new", () => {
+    const easy_analyzer = new lucy.EasyAnalyzer("en");
+    expect(easy_analyzer).toBeDefined();
+  });
+
+  it("can create a EasyAnalyzer without new", () => {
+    const easy_analyzer = lucy.EasyAnalyzer("en");
+    expect(easy_analyzer).toBeDefined();
+  });
 });
