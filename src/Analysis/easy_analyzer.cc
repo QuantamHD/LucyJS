@@ -1,5 +1,5 @@
 #include "easy_analyzer.h"
-#include "macros.h"
+#include "../macros.h"
 
 Nan::Persistent<v8::FunctionTemplate> EasyAnalyzerJS::function_template;
 Nan::Persistent<v8::Function> EasyAnalyzerJS::constructor;

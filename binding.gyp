@@ -3,14 +3,14 @@
     {
       "target_name": "lucy",
       "sources": [ 
-        "src/hit_doc.cc",
-        "src/hits.cc",
-        "src/analyzer.cc",
-        "src/easy_analyzer.cc",
-        "src/schema.cc",
-        "src/index_searcher.cc",
-        "src/field_type.cc",
-        "src/full_text_type.cc",
+        "src/Document/hit_doc.cc",
+        "src/Search/hits.cc",
+        "src/Analysis/analyzer.cc",
+        "src/Analysis/easy_analyzer.cc",
+        "src/Plan/schema.cc",
+        "src/Search/index_searcher.cc",
+        "src/Plan/field_type.cc",
+        "src/Plan/full_text_type.cc",
         "src/lucy.cc"
       ],
       "include_dirs": [

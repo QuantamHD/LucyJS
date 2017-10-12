@@ -1,5 +1,5 @@
 #include "schema.h"
-#include "macros.h"
+#include "../macros.h"
 
 Nan::Persistent<v8::Function> SchemaJS::constructor;
 

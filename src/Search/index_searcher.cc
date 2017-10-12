@@ -1,7 +1,4 @@
 #include "index_searcher.h"
-#include "schema.h"
-#include "hits.h"
-#include "macros.h"
 #include <vector>
 
 Nan::Persistent<v8::Function> IndexSearcherJS::constructor;

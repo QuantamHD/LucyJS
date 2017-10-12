@@ -1,14 +1,14 @@
 #include <nan.h>
 
 #include "lucy_parcel.h"
-#include "schema.h"
-#include "index_searcher.h"
-#include "hit_doc.h"
-#include "hits.h"
-#include "analyzer.h"
-#include "easy_analyzer.h"
-#include "field_type.h"
-#include "full_text_type.h"
+#include "Plan/schema.h"
+#include "Search/index_searcher.h"
+#include "Document/hit_doc.h"
+#include "Search/hits.h"
+#include "Analysis/analyzer.h"
+#include "Analysis/easy_analyzer.h"
+#include "Plan/field_type.h"
+#include "Plan/full_text_type.h"
 
 using v8::FunctionTemplate;
 

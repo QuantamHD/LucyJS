@@ -3,10 +3,11 @@
 
 #include <nan.h>
 
-#include "field_type.h"
-#include "analyzer.h"
 #include "Clownfish/String.h"
 #include "Lucy/Plan/FullTextType.h"
+#include "field_type.h"
+#include "../Analysis/analyzer.h"
+
 
 class FullTextTypeJS : public Nan::ObjectWrap {
 public:

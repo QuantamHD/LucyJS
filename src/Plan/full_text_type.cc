@@ -1,5 +1,5 @@
 #include "full_text_type.h"
-#include "macros.h"
+#include "../macros.h"
 
 Nan::Persistent<v8::FunctionTemplate> FullTextTypeJS::function_template;
 Nan::Persistent<v8::Function> FullTextTypeJS::constructor;

@@ -1,5 +1,5 @@
 #include "hits.h"
-#include "hit_doc.h"
+#include "../Document/hit_doc.h"
 
 Nan::Persistent<v8::Function> HitsJS::constructor;
 
