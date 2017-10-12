@@ -9,7 +9,10 @@
 #include "Lucy/Search/Hits.h"
 #include "Lucy/Search/IndexSearcher.h"
 #include "Lucy/Plan/Schema.h"
-#include "hit_doc.h"
+#include "../Document/hit_doc.h"
+#include "../Plan/schema.h"
+#include "../Search/hits.h"
+#include "../macros.h"
 
 class IndexSearcherJS : public Nan::ObjectWrap {
 public:

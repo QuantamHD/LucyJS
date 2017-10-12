@@ -1,5 +1,5 @@
 #include "schema.h"
-#include "macros.h"
+#include "../macros.h"
 
 Nan::Persistent<v8::Function> SchemaJS::constructor;
 
@@ -11,6 +11,8 @@ NAN_MODULE_INIT(SchemaJS::Init) {
   tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
   v8::Isolate* isolate = v8::Isolate::GetCurrent();
+
+  Nan::SetPrototypeMethod(tpl, "specField", Spec_Field);
 
   Nan::SetAccessor(tpl->InstanceTemplate(), v8::String::NewFromUtf8(isolate, "num_fields"), Num_Fields);
   Nan::SetAccessor(tpl->InstanceTemplate(), v8::String::NewFromUtf8(isolate, "all_fields"), All_Fields);
@@ -49,10 +51,41 @@ NAN_METHOD(SchemaJS::New) {
   info.GetReturnValue().Set(info.This());
 }
 
+NAN_METHOD(SchemaJS::Spec_Field) {
+  lucy_Schema *schema = ObjectWrap::Unwrap<SchemaJS>(info.Holder())->schema;
+  REQUIRE_ARGUMENTS(2);
+  REQUIRE_ARGUMENT_STRING(0, field_name);
+  
+  Nan::MaybeLocal<v8::Object> field_type_maybe = Nan::To<v8::Object>(info[1]);
+  if(field_type_maybe.IsEmpty()) {
+    return;
+  }
+
+  v8::Local<v8::Object> field_type_local = field_type_maybe.ToLocalChecked();
+  v8::Local<v8::FunctionTemplate> field_type_js = Nan::New(FieldTypeJS::function_template);
+  if(!field_type_js->HasInstance(field_type_local)) {
+    return Nan::ThrowTypeError("The parameter provided must be a FieldType");
+  }
+
+  lucy_FieldType *lucy_field_type = ObjectWrap::Unwrap<FieldTypeJS>(field_type_local)->get_field_type();
+  cfish_String *field_str = cfish_Str_newf(*field_name);
+  LUCY_Schema_Spec_Field(schema, field_str, lucy_field_type);
+  CFISH_DECREF(field_str);
+}
+
+void SchemaJS::SET_SCHEMA(lucy_Schema *schema) {
+  if (this->schema == NULL) {
+    this->schema = schema;
+  }
+
+  CFISH_DECREF(this->schema);
+  this->schema = schema;
+}
+
 v8::Local<v8::Object> SchemaJS::NewObject(lucy_Schema *schema){
   Nan::EscapableHandleScope scope;
   v8::Local<v8::Object> instance = Nan::NewInstance(Nan::New<v8::Function>(constructor)).ToLocalChecked();
 
-  ObjectWrap::Unwrap<SchemaJS>(instance)->schema = schema;
+  ObjectWrap::Unwrap<SchemaJS>(instance)->SET_SCHEMA(schema);
   return scope.Escape(instance);
 }

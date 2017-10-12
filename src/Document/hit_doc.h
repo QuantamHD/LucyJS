@@ -8,7 +8,7 @@
 #include "Lucy/Search/Hits.h"
 #include "Lucy/Search/IndexSearcher.h"
 
-#include "macros.h"
+#include "../macros.h"
 
 
 class HitDocJS : public Nan::ObjectWrap

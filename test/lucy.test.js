@@ -38,4 +38,29 @@ describe("lucy", () => {
     const easy_analyzer = lucy.EasyAnalyzer("en");
     expect(easy_analyzer).toBeDefined();
   });
+
+  it("has a FullTextType method", () => {
+    expect(lucy.FullTextType).toBeDefined();
+  });
+
+  it("cannot create a FullTextType with non Analyzer type", () => {
+    expect(() => {
+      const full_text_type = new lucy.FullTextType(1);
+    }).toThrow();
+  });
+
+  describe("creating FieldTypes", () => {
+    describe("with EasyAnalyzer", () => {
+      let easy_analyzer;
+      
+      beforeAll(() => {
+        easy_analyzer = new lucy.EasyAnalyzer("en");
+      });
+      
+      it("can create FullTextType", () =>{
+        const full_text_type = new lucy.FullTextType(easy_analyzer);
+        expect(full_text_type).toBeDefined();
+      });
+    });
+  })
 });
