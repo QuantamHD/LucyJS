@@ -5,9 +5,12 @@
       "sources": [ 
         "src/hit_doc.cc",
         "src/hits.cc",
+        "src/analyzer.cc",
         "src/easy_analyzer.cc",
         "src/schema.cc",
         "src/index_searcher.cc",
+        "src/field_type.cc",
+        "src/full_text_type.cc",
         "src/lucy.cc"
       ],
       "include_dirs": [

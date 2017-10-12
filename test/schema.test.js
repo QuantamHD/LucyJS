@@ -23,6 +23,20 @@ describe("schema", () => {
     expect(schema.all_fields).toBeDefined();
   });
 
+  it("has a spec field method", () => {
+    expect(schema.specField).toBeDefined();
+  });
+
+  it("can spec a field", () => {
+    const new_schema = new lucy.Schema();
+    const easy_analyzer = new lucy.EasyAnalyzer("en");
+    const full_text_type = new lucy.FullTextType(easy_analyzer);
+    new_schema.specField("title", full_text_type);
+    new_schema.specField("content", full_text_type);
+    new_schema.specField("url", full_text_type);
+    expect(new_schema.num_fields).toBe(3);
+  });
+
   it("has only the correct field names", () => {
     expect(schema.all_fields).toContain('title');
     expect(schema.all_fields).toContain('url');
