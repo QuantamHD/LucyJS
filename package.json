@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node lib/lucy.js",
     "test": "./node_modules/.bin/jest",
-    "test-watch": "./node_modules/.bin/jest --watch"
+    "test-watch": "./node_modules/.bin/jest --watch",
+    "docs": "./node_modules/.bin/jsdoc lib -d docs"
   },
   "author": "Ethan Mahintorabi",
   "license": "MIT",
@@ -16,12 +17,10 @@
   },
   "gypfile": true,
   "devDependencies": {
-    "jest": "^21.2.1"
+    "jest": "^21.2.1",
+    "jsdoc": "^3.5.5"
   },
   "jest": {
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/src/"
-    ]
+    "testPathIgnorePatterns": ["/node_modules/", "/src/"]
   }
 }
