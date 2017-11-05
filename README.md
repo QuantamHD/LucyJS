@@ -4,7 +4,9 @@
 
 
 # Lucy JS
-Lucy JS is a wrapper around the Apache Lucy search engine library.
+Lucy JS is a wrapper around the Apache Lucy search engine library. 
+
+[Project Home](https://github.com/QuantamHD/LucyJS)
 
 ## Usage
 
